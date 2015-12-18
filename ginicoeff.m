@@ -10,8 +10,8 @@ function [coeff, IDX] = ginicoeff(In,dim,nosamplecorr)
 %              2 row-wise computation
 %
 %   GINICOEFF(...,NOSAMPLECORR) Don't apply sample correction
-%       - nosamplecorr: true  or 1, apply correction (DEFAULT)
-%                       false or 0, don't apply and divide by 'n'
+%       - nosamplecorr: false or 0, apply correction (DEFAULT)  
+%                       true  or 1, don't apply and divide by 'n'
 %
 %    [COEFF, IDX] = ...
 %       - coeff : n by 1 vector with gini coefficients where n is the number of
@@ -42,6 +42,7 @@ function [coeff, IDX] = ginicoeff(In,dim,nosamplecorr)
 
 % Author: Oleg Komarov (oleg.komarov@hotmail.it)
 % Tested on R14SP3 (7.1) and on R2009b
+% 18 dec 2015 - Fix comment on default sample correction
 % 21 jan 2010 - Created
 % 05 feb 2010 - Per Jos (10584) suggestion: sample correction is now the default; if elements in a series < 2 --> NaN. Edited help. Added link to FEX page.
 % 15 jun 2010 - NaNs were not ignored due to a misplacing in the lines of code
