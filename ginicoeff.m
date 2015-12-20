@@ -41,11 +41,12 @@ function [coeff, IDX] = ginicoeff(In,dim,nosamplecorr)
 % - <a href="matlab:web('http://www.mathworks.com/matlabcentral/fileexchange/26452-gini-coefficient','-browser')">FEX ginicoeff page</a>
 
 % Author: Oleg Komarov (oleg.komarov@hotmail.it)
-% Tested on R14SP3 (7.1) and on R2009b
-% 18 dec 2015 - Fix comment on default sample correction
+% Tested on R14SP3 (7.1), R2009b and R2013b
 % 21 jan 2010 - Created
 % 05 feb 2010 - Per Jos (10584) suggestion: sample correction is now the default; if elements in a series < 2 --> NaN. Edited help. Added link to FEX page.
 % 15 jun 2010 - NaNs were not ignored due to a misplacing in the lines of code
+% 18 dec 2015 - Fix comment on default sample correction
+% 20 dec 2015 - Reorder change history and add new tested Matlab version
 
 % CHECK
 % ------------------------------------------------------------------------
