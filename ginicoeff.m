@@ -10,7 +10,7 @@ function [coeff, IDX] = ginicoeff(In,dim,nosamplecorr)
 %              2 row-wise computation
 %
 %   GINICOEFF(...,NOSAMPLECORR) Don't apply sample correction
-%       - nosamplecorr: false or 0, apply correction (DEFAULT)  
+%       - nosamplecorr: false or 0, apply correction (DEFAULT)
 %                       true  or 1, don't apply and divide by 'n'
 %
 %    [COEFF, IDX] = ...
@@ -52,13 +52,16 @@ function [coeff, IDX] = ginicoeff(In,dim,nosamplecorr)
 % ------------------------------------------------------------------------
 
 % NINPUTS
-error(nargchk(1,3,nargin));
+narginchk(1,3);
 
 % IN
-if ~isnumeric(In); error('ginicoeff:fmtIn', 'IN should be numeric'); end
+if ~isnumeric(In)
+    error('ginicoeff:fmtIn', 'IN should be numeric');
+end
 
 % DIM
-if nargin == 1 || isempty(dim); dim = 1;
+if nargin == 1 || isempty(dim)
+    dim = 1;
 elseif ~(isnumeric(dim) && (dim == 1 || dim == 2))
     error('ginicoeff:fmtDim', 'DIM should be 1 or 2');
 end
@@ -71,7 +74,10 @@ elseif  ~isscalar(nosamplecorr) || ~(islogical(nosamplecorr) || ismembc(nosample
 end
 
 % IN VECTOR
-if isvector(In); In = In(:); dim = 1; end
+if isvector(In)
+    In  = In(:);
+    dim = 1;
+end
 
 % ENGINE
 % ------------------------------------------------------------------------
@@ -79,7 +85,11 @@ if isvector(In); In = In(:); dim = 1; end
 % Negative values or one-element series (not admitted)
 IDXnan = isnan(In);
 IDX    = any(In < 0,dim) | sum(~IDXnan,dim) < 2;
-if dim == 1; In(:,IDX) = 0; else In(IDX,:) = 0; end
+if dim == 1
+    In(:,IDX) = 0; 
+else
+    In(IDX,:) = 0;
+end
 if nargout ~= 2 && any(IDX)
     warning('warnginicoeff:negValues','Check IDX for negative values or one-element series')
 end
@@ -94,10 +104,10 @@ In = sort(In,dim,'ascend');
 freq = flipdim(cumsum(flipdim(~IDXnan,dim),dim),dim);
 
 % Total numel
-if dim == 1; 
-    totNum = freq(1,:); 
+if dim == 1
+    totNum = freq(1,:);
 else
-    totNum = freq(:,1); 
+    totNum = freq(:,1);
 end
 
 % Totals
