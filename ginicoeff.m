@@ -94,6 +94,9 @@ if nargout ~= 2 && any(IDX)
     warning('warnginicoeff:negValues','Check IDX for negative values or one-element series')
 end
 
+% Total numel
+totNum = sum(~IDXnan,dim);
+
 % Replace NaNs
 In(IDXnan) = 0;
 
@@ -101,14 +104,8 @@ In(IDXnan) = 0;
 In = sort(In,dim,'ascend');
 
 % Calculate frequencies for each series
-freq = flipdim(cumsum(flipdim(~IDXnan,dim),dim),dim);
+freq = flipdim(cumsum(ones(size(In)),dim),dim);
 
-% Total numel
-if dim == 1
-    totNum = freq(1,:);
-else
-    totNum = freq(:,1);
-end
 
 % Totals
 tot = sum(In,dim);
